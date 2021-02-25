@@ -1,0 +1,28 @@
+@import '../styles/variables.module';
+
+.fly-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__text {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #A0B0B9;
+  }
+
+  &__description {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: $text;
+  }
+}
