@@ -27,15 +27,15 @@ const Filters = () => (
       <label className={cn(`${CLASS_NAME}__label`)}>
         <input className={cn(`${CLASS_NAME}__input`)} type="checkbox" name="two-transfer" defaultChecked />
         <span className={cn(`${CLASS_NAME}__checkbox`)} />
-        2 пересадка
+        2 пересадки
       </label>
       <label className={cn(`${CLASS_NAME}__label`)}>
         <input className={cn(`${CLASS_NAME}__input`)} type="checkbox" name="three-transfer" />
         <span className={cn(`${CLASS_NAME}__checkbox`)} />
-        3 пересадка
+        3 пересадки
       </label>
     </div>
   </div>
-)
+);
 
 export default Filters;

@@ -1,6 +1,6 @@
 @import '../styles/variables.module';
 
-.fly-info {
+.flyght-info {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
@@ -8,6 +8,7 @@
   &__item {
     display: flex;
     flex-direction: column;
+    flex-basis: 23%;
   }
 
   &__text {
@@ -16,7 +17,7 @@
     line-height: 18px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: #A0B0B9;
+    color: #a0b0b9;
   }
 
   &__description {

@@ -1,4 +1,4 @@
-@import  '../styles/variables.module';
+@import '../styles/variables.module';
 
 .app {
   max-width: 960px;
@@ -6,11 +6,11 @@
   padding: 0 103px;
   background: $app-background;
 
-  @media(max-width: 900px) {
+  @media (max-width: 900px) {
     padding: 0 50px;
   }
 
-  @media(max-width: 450px) {
+  @media (max-width: 450px) {
     padding: 0 20px;
   }
 
@@ -23,7 +23,7 @@
   &__content {
     display: flex;
 
-    @media(max-width: 700px) {
+    @media (max-width: 700px) {
       flex-direction: column;
     }
   }
@@ -32,7 +32,7 @@
 .filters-wrapper {
   margin-right: 20px;
 
-  @media(max-width: 700px) {
+  @media (max-width: 700px) {
     margin-right: 0;
     margin-bottom: 20px;
   }
