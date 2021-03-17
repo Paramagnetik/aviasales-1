@@ -8,7 +8,6 @@ const CLASS_NAME = 'ticket';
 const cn = classnames.bind(styles);
 
 const Ticket = ({ ticket }) => {
-
   const { price, segments, carrier } = ticket;
 
   return (
@@ -19,17 +18,17 @@ const Ticket = ({ ticket }) => {
       </div>
       <FlyghtInfo segments={segments} />
     </li>
-  )
+  );
 };
 
 Ticket.defaultProps = {
   ticket: {},
   price: 0,
-}
+};
 
 Ticket.propTypes = {
   ticket: PropTypes.objectOf(PropTypes.any),
   price: PropTypes.number,
-}
+};
 
 export default Ticket;

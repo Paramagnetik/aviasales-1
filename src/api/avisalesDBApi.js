@@ -4,26 +4,20 @@ export default class AviasalesDBService {
 
     this.getSearchId = async () => {
       const response = await fetch(`${this.API_BASE}search`);
-
-      // if (!response.ok) {
-      // 	throw new Error(`Ошибка ${response.status}`);
-      // }
-
       const body = await response.json();
 
       return body;
     };
 
     this.getTickets = async (searchId) => {
-      const response = await fetch(`${this.API_BASE}tickets?searchId=${searchId}`);
+      try {
+        const response = await fetch(`${this.API_BASE}tickets?searchId=${searchId}`);
+        const { tickets, stop } = await response.json();
 
-      // if (!response.ok) {
-      // 	throw new Error(`Ошибка ${response.status}`);
-      // }
-
-      const body = await response.json();
-
-      return body;
+        return [tickets, stop];
+      } catch {
+        return [[], false];
+      }
     };
   }
 }

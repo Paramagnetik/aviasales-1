@@ -31,9 +31,22 @@ export const setActiveTabAction = (payload) => ({
   payload,
 });
 
-export const SET_ERROR_ACTION = 'SET_ERROR_ACTION';
-export const setErrorAction = () => ({
-  type: SET_ERROR_ACTION,
+export const TAKE_MORE_TICKETS = 'TAKE_MORE_TICKETS';
+export const takeMoreTicketsActions = (payload) => ({
+  type: TAKE_MORE_TICKETS,
+  payload,
+});
+
+export const SET_FILTERS_CHECKED = 'SET_ALL_FILTERS_CHECKED';
+export const setFilterCheckedAction = (payload) => ({
+  type: SET_FILTERS_CHECKED,
+  payload,
+});
+
+export const SET_TRANSFERS_ACTION = 'SET_TRANSFERS_ACTION';
+export const setTransfersAction = (payload) => ({
+  type: SET_TRANSFERS_ACTION,
+  payload,
 });
 
 export const getSearchIdThunk = () => async (dispatch) => {
@@ -41,17 +54,12 @@ export const getSearchIdThunk = () => async (dispatch) => {
   dispatch(setSearchIdAction(searchId));
 };
 
-// export const getTicketsThunk = (searchId) => async dispatch => {
-//   dispatch(startLoadingTicketsAction());
-//   const { tickets, stop } = await getTickets(searchId);
-//   dispatch(setTicketsAction(tickets));
-//   dispatch(stopLoadingTicketsAction(stop));
-// }
-
-export const getTicketsThunk = (searchId) => (dispatch) => {
+export const getTicketsThunk = (searchId) => async (dispatch) => {
   dispatch(startLoadingTicketsAction());
-  getTickets(searchId).then((data) => {
-    dispatch(setTicketsAction(data.tickets));
-    dispatch(stopLoadingTicketsAction(data.stop));
-  });
+  const [tickets, stop] = await getTickets(searchId);
+  if (!stop) {
+    dispatch(setTicketsAction(tickets));
+  } else {
+    dispatch(stopLoadingTicketsAction(stop));
+  }
 };

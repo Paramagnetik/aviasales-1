@@ -29,24 +29,24 @@ const Tabs = ({ activeTab, onTabClick }) => (
   </div>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activeTab: state.activeTab,
-})
+});
 
-const mapDispatchToProps = dispatch => ({
-    onTabClick: event => {
-      dispatch(setActiveTabAction(event.target.name))
-    }
-  })
+const mapDispatchToProps = (dispatch) => ({
+  onTabClick: (event) => {
+    dispatch(setActiveTabAction(event.target.name));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
 
 Tabs.defaultProps = {
   activeTab: 'cheaper',
   onTabClick: () => {},
-}
+};
 
 Tabs.propTypes = {
   activeTab: PropTypes.string,
   onTabClick: PropTypes.func,
-}
+};
