@@ -7,9 +7,9 @@ import 'antd/dist/antd.css';
 const cn = classnames.bind(styles);
 
 const Spinner = () => (
-	<div className={cn('spinner-wrapper')}>
-		<Spin size="large" tip="Загружаем оставшиеся билеты"/>
-	</div>
-)
+  <div className={cn('spinner-wrapper')}>
+    <Spin size="large" tip="Загружаем оставшиеся билеты" />
+  </div>
+);
 
 export default Spinner;

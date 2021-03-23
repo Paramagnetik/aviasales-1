@@ -3,7 +3,7 @@ import classnames from 'classnames/bind';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './Tabs.module.scss';
-import { setActiveTabAction } from '../redux/actions';
+import { setActiveTabAction } from '../../redux/actions';
 
 const CLASS_NAME = 'tabs';
 const cn = classnames.bind(styles);
@@ -29,11 +29,11 @@ const Tabs = ({ activeTab, onTabClick }) => (
   </div>
 );
 
-const mapStateToProps = (state) => ({
-  activeTab: state.activeTab,
+const mapStateToProps = ({ filters }) => ({
+  activeTab: filters.activeTab,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onTabClick: (event) => {
     dispatch(setActiveTabAction(event.target.name));
   },

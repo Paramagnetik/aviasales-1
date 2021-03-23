@@ -1,6 +1,6 @@
-@import '../styles/variables.module';
+@import '../../styles/variables.module';
 
-.flyght-info {
+.flight-info {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
@@ -10,7 +10,7 @@
     flex-direction: column;
     flex-basis: 30%;
 
-    @media(max-width: 370px) {
+    @media (max-width: 370px) {
       flex-basis: 40%;
       text-align: center;
     }

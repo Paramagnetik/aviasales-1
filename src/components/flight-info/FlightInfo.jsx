@@ -1,9 +1,9 @@
 import React from 'react';
 import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import styles from './FlyghtInfo.module.scss';
+import styles from './FlightInfo.module.scss';
 
-const transfersCounter = (stops) => {
+const transfersCounter = stops => {
   const transfers = stops.length;
   switch (transfers) {
     case 0:
@@ -18,7 +18,7 @@ const transfersCounter = (stops) => {
   }
 };
 
-const durationFormatter = (time) => {
+const durationFormatter = time => {
   let minutes = time % 60;
   const hours = Math.floor(time / 60);
 
@@ -41,10 +41,10 @@ const timeFormatter = (date, duration) => {
   return `${from} - ${to}`;
 };
 
-const CLASS_NAME = 'flyght-info';
+const CLASS_NAME = 'flight-info';
 const cn = classnames.bind(styles);
 
-const FlyghtInfo = ({ segments }) => {
+const FlightInfo = ({ segments }) => {
   const [flyghtTo, flyghtFrom] = segments;
 
   return (
@@ -87,12 +87,12 @@ const FlyghtInfo = ({ segments }) => {
   );
 };
 
-export default FlyghtInfo;
+export default FlightInfo;
 
-FlyghtInfo.defaultProps = {
+FlightInfo.defaultProps = {
   segments: [],
 };
 
-FlyghtInfo.propTypes = {
+FlightInfo.propTypes = {
   segments: PropTypes.arrayOf(PropTypes.objectOf),
 };

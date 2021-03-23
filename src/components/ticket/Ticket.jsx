@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import FlyghtInfo from '../flyght-info';
+import FlightInfo from '../flight-info';
 import styles from './Ticket.module.scss';
 
 const CLASS_NAME = 'ticket';
@@ -16,7 +16,7 @@ const Ticket = ({ ticket }) => {
         <span className={cn(`${CLASS_NAME}__price`)}>{price.toLocaleString()} P</span>
         <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt="Aviacompany logo" />
       </div>
-      <FlyghtInfo segments={segments} />
+      <FlightInfo segments={segments} />
     </li>
   );
 };

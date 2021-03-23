@@ -1,3 +1,4 @@
+/* eslint-disable id-length */
 import React, { useEffect } from 'react';
 import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -6,42 +7,47 @@ import { connect } from 'react-redux';
 import { Alert, BackTop } from 'antd';
 import Ticket from '../ticket';
 import styles from './TicketList.module.scss';
-import { getSearchIdThunk, getTicketsThunk } from '../redux/actions';
+import { getSearchIdThunk, getTicketsThunk } from '../../redux/actions';
 import Spinner from '../spinner';
 import ButtonMore from '../button-more/ButtonMore';
 
 const CLASS_NAME = 'tickets-list';
 const cn = classnames.bind(styles);
 
-function sortTickets(tickets, take, activeTab, transfers) {
-  const sortedTickets = [...tickets];
+function sortTickets(tickets, ticketsShown, activeTab, activeFilters) {
+  const filters = [...activeFilters];
+  filters.shift();
+  const sortedTickets = tickets.filter(ticket => filters.reduce((acc, item, i) => {
+    if (item) {
+      acc.push(i)
+    }
+    return acc;
+  }, []).includes(ticket.segments[0].stops.length));
 
   if (activeTab === 'faster') {
     return sortedTickets
-            .sort((a, b) => (a.segments[0].duration + a.segments[1].duration) - (b.segments[0].duration + b.segments[1].duration))
-            .filter(ticket => transfers.includes(ticket.segments[0].stops.length))
-            .slice(0, take)
+      .sort(
+        (a, b) => a.segments[0].duration + a.segments[1].duration - (b.segments[0].duration + b.segments[1].duration)
+      )
+      .slice(0, ticketsShown);
   }
-  
+
   return sortedTickets
-          .sort((a, b) => a.price - b.price)
-          .filter(ticket => transfers.includes(ticket.segments[0].stops.length))
-          .slice(0, take);
+    .sort((a, b) => a.price - b.price)
+    .slice(0, ticketsShown);
 }
 
-const TicketsList = ({ searchId, getSearchId, getTickets, stop, isLoading, tickets, activeTab, take, transfers}) => {
+const TicketsList = ({ searchId, getSearchId, getTickets, stop, isLoading, visibleTickets, tickets }) => {
   useEffect(() => {
     getSearchId();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (searchId && !stop) {
-      getTickets(searchId)
+      getTickets(searchId);
     }
-  }, [getTickets, searchId, stop, tickets])
-  
-  const visibleTickets = sortTickets(tickets, take, activeTab, transfers);
+  }, [getTickets, searchId, stop, tickets]);
 
   const ticketsList = visibleTickets.map((ticket) => {
     const id = uuidv4();
@@ -56,7 +62,7 @@ const TicketsList = ({ searchId, getSearchId, getTickets, stop, isLoading, ticke
       ) : (
         <>
           <ul className={cn(CLASS_NAME)}>{ticketsList}</ul>
-          {ticketsList.length && <ButtonMore/>} 
+          {ticketsList.length && <ButtonMore />}
           <BackTop>
             <div className={cn(`${CLASS_NAME}__back-top`)}>&uarr;</div>
           </BackTop>
@@ -66,14 +72,14 @@ const TicketsList = ({ searchId, getSearchId, getTickets, stop, isLoading, ticke
   );
 };
 
-const mapStateToProps = ({ tickets, searchId, activeTab, stop, isLoading, take, transfers }) => ({
-  searchId,
-  stop,
-  activeTab,
-  isLoading,
-  take,
-  tickets,
-  transfers,
+const mapStateToProps = ({ tickets, filters, searchId }) => ({
+  searchId: searchId.searchId,
+  stop: tickets.stop,
+  activeTab: filters.activeTab,
+  isLoading: tickets.isLoading,
+  ticketsShown: tickets.ticketsShown,
+  tickets: tickets.tickets,
+  visibleTickets: sortTickets(tickets.tickets, tickets.ticketsShown, filters.activeTab, filters.activeFilters),
 });
 
 const mapDispatchToProps = {
@@ -85,26 +91,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(TicketsList);
 
 TicketsList.defaultProps = {
   tickets: [],
+  visibleTickets: [],
   searchId: '',
   stop: true,
   isLoading: true,
-  activeTab: 'cheaper',
-  take: 5,
-  transfers: [],
   getSearchId: () => {},
   getTickets: () => {},
 };
 
 TicketsList.propTypes = {
   tickets: PropTypes.arrayOf(PropTypes.object),
+  visibleTickets: PropTypes.arrayOf(PropTypes.object),
   searchId: PropTypes.string,
   getSearchId: PropTypes.func,
   getTickets: PropTypes.func,
   stop: PropTypes.bool,
   isLoading: PropTypes.bool,
-  take: PropTypes.number,
-  activeTab: PropTypes.string,
-  transfers: PropTypes.arrayOf(PropTypes.number),
 };
-
-
