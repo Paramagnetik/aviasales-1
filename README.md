@@ -1,1 +1,1 @@
-app: https://aviasales-chi-two.vercel.app/
+app: https://aviasales-slonin.vercel.app/
