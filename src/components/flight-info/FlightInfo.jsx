@@ -3,7 +3,7 @@ import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import styles from './FlightInfo.module.scss';
 
-const transfersCounter = stops => {
+const transfersCounter = (stops) => {
   const transfers = stops.length;
   switch (transfers) {
     case 0:
@@ -18,7 +18,7 @@ const transfersCounter = stops => {
   }
 };
 
-const durationFormatter = time => {
+const durationFormatter = (time) => {
   let minutes = time % 60;
   const hours = Math.floor(time / 60);
 
@@ -89,10 +89,6 @@ const FlightInfo = ({ segments }) => {
 
 export default FlightInfo;
 
-FlightInfo.defaultProps = {
-  segments: [],
-};
-
 FlightInfo.propTypes = {
-  segments: PropTypes.arrayOf(PropTypes.objectOf),
+  segments: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
 };

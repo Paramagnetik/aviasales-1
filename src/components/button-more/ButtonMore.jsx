@@ -3,7 +3,7 @@ import classnames from 'classnames/bind';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './ButtonMore.module.scss';
-import { takeMoreTicketsActions } from '../../redux/actions';
+import { takeMoreTicketsAction } from '../../redux/actions';
 
 const cn = classnames.bind(styles);
 
@@ -14,15 +14,11 @@ const ButtonMore = ({ showMoreTickets }) => (
 );
 
 const mapDispatchToProps = {
-  showMoreTickets: takeMoreTicketsActions,
+  showMoreTickets: takeMoreTicketsAction,
 };
 
 export default connect(null, mapDispatchToProps)(ButtonMore);
 
-ButtonMore.defaultProps = {
-  showMoreTickets: () => {},
-};
-
 ButtonMore.propTypes = {
-  showMoreTickets: PropTypes.func,
+  showMoreTickets: PropTypes.func.isRequired,
 };

@@ -14,15 +14,17 @@ import ButtonMore from '../button-more/ButtonMore';
 const CLASS_NAME = 'tickets-list';
 const cn = classnames.bind(styles);
 
-function sortTickets(tickets, ticketsShown, activeTab, activeFilters) {
-  const filters = [...activeFilters];
-  filters.shift();
-  const sortedTickets = tickets.filter(ticket => filters.reduce((acc, item, i) => {
-    if (item) {
-      acc.push(i)
-    }
-    return acc;
-  }, []).includes(ticket.segments[0].stops.length));
+function sortTickets(tickets, ticketsShown, activeTab, filters) {
+  const sortedTickets = tickets.filter((ticket) =>
+    filters
+      .reduce((acc, item, i) => {
+        if (item.active) {
+          acc.push(i);
+        }
+        return acc;
+      }, [])
+      .includes(ticket.segments[0].stops.length)
+  );
 
   if (activeTab === 'faster') {
     return sortedTickets
@@ -32,9 +34,7 @@ function sortTickets(tickets, ticketsShown, activeTab, activeFilters) {
       .slice(0, ticketsShown);
   }
 
-  return sortedTickets
-    .sort((a, b) => a.price - b.price)
-    .slice(0, ticketsShown);
+  return sortedTickets.sort((a, b) => a.price - b.price).slice(0, ticketsShown);
 }
 
 const TicketsList = ({ searchId, getSearchId, getTickets, stop, isLoading, visibleTickets, tickets }) => {
@@ -74,12 +74,9 @@ const TicketsList = ({ searchId, getSearchId, getTickets, stop, isLoading, visib
 
 const mapStateToProps = ({ tickets, filters, searchId }) => ({
   searchId: searchId.searchId,
-  stop: tickets.stop,
+  ...tickets,
   activeTab: filters.activeTab,
-  isLoading: tickets.isLoading,
-  ticketsShown: tickets.ticketsShown,
-  tickets: tickets.tickets,
-  visibleTickets: sortTickets(tickets.tickets, tickets.ticketsShown, filters.activeTab, filters.activeFilters),
+  visibleTickets: sortTickets(tickets.tickets, tickets.ticketsShown, filters.activeTab, filters.filters),
 });
 
 const mapDispatchToProps = {

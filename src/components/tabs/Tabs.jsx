@@ -33,7 +33,7 @@ const mapStateToProps = ({ filters }) => ({
   activeTab: filters.activeTab,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onTabClick: (event) => {
     dispatch(setActiveTabAction(event.target.name));
   },
@@ -41,12 +41,7 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
 
-Tabs.defaultProps = {
-  activeTab: 'cheaper',
-  onTabClick: () => {},
-};
-
 Tabs.propTypes = {
-  activeTab: PropTypes.string,
-  onTabClick: PropTypes.func,
+  activeTab: PropTypes.string.isRequired,
+  onTabClick: PropTypes.func.isRequired,
 };

@@ -31,14 +31,20 @@ export const setActiveTabAction = (payload) => ({
   payload,
 });
 
-export const TAKE_MORE_TICKETS = 'TAKE_MORE_TICKETS';
-export const takeMoreTicketsActions = () => ({
-  type: TAKE_MORE_TICKETS,
+export const TAKE_MORE_TICKETS_ACTION = 'TAKE_MORE_TICKETS_ACTION';
+export const takeMoreTicketsAction = () => ({
+  type: TAKE_MORE_TICKETS_ACTION,
 });
 
-export const SET_FILTERS_CHECKED = 'SET_FILTERS_CHECKED';
+export const SET_FILTERS_CHECKED_ACTION = 'SET_FILTERS_CHECKED_ACTION';
 export const setFilterCheckedAction = (payload) => ({
-  type: SET_FILTERS_CHECKED,
+  type: SET_FILTERS_CHECKED_ACTION,
+  payload,
+});
+
+export const SET_ALL_FILTERS_CHECKED_ACTION = 'SET_ALL_FILTERS_CHECKED_ACTION';
+export const setAllFiltersCheckedAction = (payload) => ({
+  type: SET_ALL_FILTERS_CHECKED_ACTION,
   payload,
 });
 

@@ -2,7 +2,7 @@ import {
   START_LOADING_TICKETS_ACTION,
   STOP_LOADING_TICKETS_ACTION,
   SET_TICKETS_ACTION,
-  TAKE_MORE_TICKETS,
+  TAKE_MORE_TICKETS_ACTION,
 } from '../actions';
 
 const initialState = {
@@ -23,7 +23,7 @@ const tickets = (state = initialState, { type, payload }) => {
     case SET_TICKETS_ACTION:
       return { ...state, tickets: [...state.tickets, ...payload] };
 
-    case TAKE_MORE_TICKETS:
+    case TAKE_MORE_TICKETS_ACTION:
       return { ...state, ticketsShown: state.ticketsShown + 5 };
 
     default:
