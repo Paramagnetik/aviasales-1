@@ -4,10 +4,10 @@ const initialState = {
   activeTab: 'cheaper',
   isFilterAllChecked: false,
   filters: [
-    { name: 'no-transfer', text: 'Без пересадок', active: false },
-    { name: 'one-transfer', text: '1 пересадка', active: true },
-    { name: 'two-transfer', text: '2 пересадки', active: true },
-    { name: 'three-transfer', text: '3 пересадки', active: false },
+    { name: 'no-transfer', text: 'Без пересадок', isActive: false },
+    { name: 'one-transfer', text: '1 пересадка', isActive: true },
+    { name: 'two-transfer', text: '2 пересадки', isActive: true },
+    { name: 'three-transfer', text: '3 пересадки', isActive: false },
   ],
 };
 

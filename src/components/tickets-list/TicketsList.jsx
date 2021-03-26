@@ -18,7 +18,7 @@ function sortTickets(tickets, ticketsShown, activeTab, filters) {
   const sortedTickets = tickets.filter((ticket) =>
     filters
       .reduce((acc, item, i) => {
-        if (item.active) {
+        if (item.isActive) {
           acc.push(i);
         }
         return acc;
