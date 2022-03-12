@@ -1,6 +1,6 @@
 export default class AviasalesDBService {
   constructor() {
-    this.API_BASE = 'https://aviasales-test-api.java-mentor.com/';
+    this.API_BASE = 'https://front-test.beta.aviasales.ru/';
 
     this.getSearchId = async () => {
       const response = await fetch(`${this.API_BASE}search`);
